@@ -1,5 +1,29 @@
-<h1>Dashboard#index</h1>
+<h1>Welcome <%= current_user.email%></h1>
+<h4>Date: <%= Date.today.strftime("%B %d, %Y") %></h4>
+</br>
+</br>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Article Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">Date Created</th>
+      <th scope="col">Date Modified</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @Articles.each_with_index do |article,index| %>
+    <tr> 
+      <td><%= link_to article.title, edit_article_path(article.id) %></td>
+      <td><%= article.description %></td>
+      <td><%= article.created_at.strftime("%I:%M %p") %></td>
+      <td><%= article.updated_at.strftime("%I:%M %p") %></td>
+    </tr>
+    <% end %>
+
+  </tbody>
+</table> 
+</br>
 <%= button_to "Create New Article" ,new_article_path , method: :get %>
 </br>
-<p>Find me in app/views/dashboard/index.html.erb</p>
 <%= button_to "Log Out", destroy_user_session_path, method: :delete %>
