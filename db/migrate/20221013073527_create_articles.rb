@@ -3,8 +3,11 @@ class CreateArticles < ActiveRecord::Migration[7.0]
     create_table :articles do |t|
       t.string :title
       t.string :description
+      t.text :body
+      t.integer :user_id
 
       t.timestamps
     end
+    add_index :articles, :user_id
   end
 end
