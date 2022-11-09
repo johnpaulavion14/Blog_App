@@ -10,6 +10,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+        rock: ['Rock Salt' , ...defaultTheme.fontFamily.sans],
       },
     },
   },
@@ -19,5 +20,4 @@ module.exports = {
     require('@tailwindcss/typography'),
   ]
 }
-
 
