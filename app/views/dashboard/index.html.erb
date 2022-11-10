@@ -1,32 +1,54 @@
-<h1>Welcome <%= current_user.email%></h1>
-<h4>Date: <%= Date.today.strftime("%B %d, %Y") %></h4>
-</br>
-</br>
-<p style="color: green"><%= notice %></p>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Article Title</th>
-      <th scope="col">Description</th>
-      <th scope="col">Date Created</th>
-      <th scope="col">Date Modified</th>
-      <th scope="col">Delete Article</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @Articles.each_with_index do |article,index| %>
-    <tr> 
-      <td><%= link_to article.title, edit_article_path(article.id) %></td>
-      <td><%= article.description %></td>
-      <td><%= article.created_at.strftime("%I:%M %p") %></td>
-      <td><%= article.updated_at.strftime("%I:%M %p") %></td>
-      <td><%= button_to "Delete", delete_article_path(article.id), method: :delete %></td>
-    </tr>
-    <% end %>
+<div class="p-8">
+  <h1 class="font-fredoka text-xl">Welcome to your Blog! ,</h1>
+  <h1 class="font-gochi text-xl"><%= current_user.email%></h1>
+  <h4>Date: <%= Date.today.strftime("%B %d, %Y") %></h4>
+  <%= button_to "Log Out",destroy_user_session_path, method: :delete, class:"bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"%>      
+  </br>
+  <div class="flex flex-col items-center bg-amber-200 w-max mx-auto p-10 rounded-2xl min-h-[500px]">
+    <%= button_to "Create New Article" ,new_article_path , method: :get, class:"bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"%>  
+    <div class="mt-5">
+      <%= form_with url: "/dashboard/index", method: :get do |form| %>
+        <%= form.text_field :query ,size: "10x1", placeholder:"search title"%>
+        <%= form.submit "Search", class:"bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"%>
+      <% end %>
+    </div>
+    </br>
+    <p style="color: green"><%= notice %></p>
 
-  </tbody>
-</table> 
-</br>
-<%= button_to "Create New Article" ,new_article_path , method: :get %>
-</br>
-<%= button_to "Log Out", destroy_user_session_path, method: :delete %>
+    <div class="flex flex-col">
+      <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+          <div class="overflow-hidden">
+            <table class="table-auto mt-3">
+              <thead class="border-b">
+                <tr>
+                  <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">#</th>
+                  <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left hover:underline"><%= sort_link(@q, :title, 'Article Title', default_order: :asc) %></th>
+                  <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Description</th>
+                  <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left hover:underline"><%= sort_link(@q, :created_at, 'Date Created', default_order: :asc) %></th>
+                  <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left hover:underline"><%= sort_link(@q, :updated_at, 'Date Modified', default_order: :asc) %></th>
+                  <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Delete Article</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @Articles.each_with_index do |article,index| %>
+                <tr class="border-b"> 
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><%=index+1%></td>
+                  <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap hover:scale-125"><%= link_to article.title, edit_article_path(article.id)%></td>
+                  <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= article.description %></td>
+                  <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= article.created_at.strftime("%I:%M%p/%b %d") %></td>
+                  <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= article.updated_at.strftime("%I:%M%p/%b %d") %></td>
+                  <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= button_to "Delete",delete_article_path(article.id), method: :delete, class:"bg-red-500 hover:bg-red-700 text-white font-bold py-1.5 px-3 rounded"%>      </td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table> 
+          </div>
+        </div>
+      </div>
+    </div>            
+  </div>
+  </br>
+  </br>
+</div>
+

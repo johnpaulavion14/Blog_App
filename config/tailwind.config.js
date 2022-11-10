@@ -11,6 +11,8 @@ module.exports = {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
         rock: ['Rock Salt' , ...defaultTheme.fontFamily.sans],
+        fredoka: ['Fredoka One' , ...defaultTheme.fontFamily.sans],
+        gochi: ['Gochi Hand' , ...defaultTheme.fontFamily.sans],
       },
     },
   },

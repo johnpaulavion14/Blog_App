@@ -1,10 +1,31 @@
-<h1>Editing article</h1>
-<p style="color: green"><%= notice %></p>
+<div class="p-5">
+    <h1 class="text-center text-4xl font-fredoka">Editing Article</h1>
+    <p class="text-center" style="color: green"><%= flash.notice %></p>
 
-<%= render "form", article: @article %>
+    <%= form_with url: update_path ,method: :patch  do |form| %>
+    <div class="ml-7">
+        <%= form.label "Title:",class:"font-bold" %>
+        <%= form.text_field :title , value: @article.title, required:true,size:"20x1",class:"border-none"%>
+    </div>
 
-<br>
+    <div class="ml-7">
+        <%= form.label "Description:" ,class:"font-bold"%>
+        <%= form.text_field :description , value: @article.description, required:true,size:"80x1",class:"border-none" %>
+    </div>
 
-<div>
-<%= button_to "back to Dashboard" ,dashboard_index_path , method: :get %>
+    <div class="flex justify-center mt-3">
+        <%= form.text_area :body ,value: @article.body, size: "130x20"%>
+    </div>
+
+    </br>
+    <div class="flex justify-center">
+        <%= form.submit "Update", class:"bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" %>
+    </div>
+
+    <% end %>
+
+    </br>
+    <div class="flex justify-center">
+        <%= button_to "back to Dashboard",dashboard_index_path , method: :get, class:"bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"%> 
+    </div>
 </div>

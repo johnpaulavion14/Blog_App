@@ -1,9 +1,30 @@
-<h1>New article</h1>
+<div class="p-5">
+    <h1 class="text-center text-4xl font-fredoka">New article</h1>
 
-<%= render "form", article: @article %>
+    <%= form_with url: "/articles" do |form| %>
+    <div class="ml-7">
+        <%= form.label "Title:",class:"font-bold" %>
+        <%= form.text_field :title , required:true,size:"20x1",class:"border-none"%>
+    </div>
 
-<br>
+    <div class="ml-7">
+        <%= form.label "Description:" ,class:"font-bold"%>
+        <%= form.text_field :description , required:true,size:"80x1",class:"border-none" %>
+    </div>
 
-<div>
-<%= button_to "back to Dashboard" ,dashboard_index_path , method: :get %>
+    <div class="flex justify-center mt-3">
+        <%= form.text_area :body , size: "130x20"%>
+    </div>
+
+    </br>
+    <div class="flex justify-center">
+        <%= form.submit "Submit", class:"bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" %>
+    </div>
+
+    <% end %>
+
+    </br>
+    <div class="flex justify-center">
+        <%= button_to "back to Dashboard",dashboard_index_path , method: :get, class:"bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"%> 
+    </div>
 </div>
