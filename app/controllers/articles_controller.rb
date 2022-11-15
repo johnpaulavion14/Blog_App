@@ -26,7 +26,7 @@ class ArticlesController < ApplicationController
 
     respond_to do |format|
       if @article.save
-        format.html { redirect_to dashboard_index_path, notice: "Article was successfully created." }
+        format.html { redirect_to dashboard_index_path({new:"notice"}) }
         format.json { render :show, status: :created, location: @article }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -52,10 +52,7 @@ class ArticlesController < ApplicationController
   def destroy
     @article.destroy
 
-    respond_to do |format|
-      format.html { redirect_to dashboard_index_path, notice: "Article was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to dashboard_index_path({del:"notice"})
   end
 
   private
